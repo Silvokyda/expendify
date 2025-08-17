@@ -8,4 +8,9 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    resolve: {
+        alias: {
+            'alpinejs': 'alpinejs/dist/module.esm.js'
+        }
+    },
 });
