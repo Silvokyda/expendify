@@ -70,11 +70,12 @@
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-16 md:py-24 grid lg:grid-cols-2 items-center gap-8 md:gap-10 text-white">
                     <!-- Copy -->
                     <div>
-                        <h1 class="text-3xl sm:text-4xl md:text-6xl font-semibold leading-tight tracking-tight">
-                            Take control of spending. Grow your savings.
+                        <p class="text-[11px] sm:text-xs uppercase tracking-widest text-white/70">Track • Pay • Save</p>
+                        <h1 class="mt-1 text-3xl sm:text-4xl md:text-6xl font-semibold leading-tight tracking-tight">
+                            Take control of spending. Pay straight from your budget.
                         </h1>
                         <p class="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-white/80 max-w-xl">
-                            Expendify makes daily expense tracking effortless and turns saving goals into progress you can see.
+                            Expendify lets you record expenses, set savings goals, and <span class="font-semibold text-white">pay merchants via M-PESA</span>—so every payment is auto-tracked.
                         </p>
 
                         <!-- CTAs -->
@@ -89,7 +90,7 @@
                         </div>
 
                         <!-- Trust strip -->
-                        <ul class="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 text-sm">
+                        <ul class="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-4 gap-2 sm:gap-4 text-sm">
                             <li class="flex items-center gap-2 bg-white/10 ring-1 ring-white/15 backdrop-blur-sm px-3 py-2 rounded-lg">
                                 <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                     <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -100,26 +101,47 @@
                                 <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                     <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <span class="text-white/85">GDPR compliant</span>
+                                <span class="text-white/85">GDPR & Data Protection compliant</span>
                             </li>
                             <li class="flex items-center gap-2 bg-white/10 ring-1 ring-white/15 backdrop-blur-sm px-3 py-2 rounded-lg">
                                 <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                     <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <span class="text-white/85">Trusted by thousands</span>
+                                <span class="text-white/85">Built for M-PESA & Paybill</span>
+                            </li>
+                            <li class="flex items-center gap-2 bg-white/10 ring-1 ring-white/15 backdrop-blur-sm px-3 py-2 rounded-lg">
+                                <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <span class="text-white/85">Backed by trusted banks</span>
                             </li>
                         </ul>
+
+                        <!-- Payment channels note -->
+                        <div class="mt-4 flex flex-wrap items-center gap-2 text-xs text-white/70">
+                            <span class="inline-flex items-center gap-2 bg-white/10 ring-1 ring-white/15 px-2.5 py-1 rounded-md">
+                                <span class="i">✅</span> Paybill (Business No. + Account)
+                            </span>
+                            <span class="inline-flex items-center gap-2 bg-white/10 ring-1 ring-white/15 px-2.5 py-1 rounded-md">
+                                <span class="i">✅</span> Buy Goods & Services (Till)
+                            </span>
+                            <span class="inline-flex items-center gap-2 bg-white/10 ring-1 ring-white/15 px-2.5 py-1 rounded-md">
+                                <span class="i">✅</span> Pochi la Biashara*
+                            </span>
+                        </div>
+                        <p class="mt-1 text-[10px] text-white/50">*Pochi support via partner/aggregator where available.</p>
                     </div>
 
-                    <!-- Phone mock / chart -->
+                    <!-- Phone mock / chart + pay demo -->
                     <div class="relative mx-auto w-full max-w-xs xs:max-w-sm sm:max-w-sm">
                         <div class="rounded-3xl px-4 sm:px-5 pt-5 sm:pt-6 pb-6 sm:pb-8 bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 shadow-lg">
                             <div class="rounded-2xl p-3 sm:p-4 bg-white/10 dark:bg-white/5 backdrop-blur-lg border border-white/10">
                                 <div class="flex items-center justify-between">
-                                    <span class="text-xs sm:text-sm text-white/80">Dashboard</span>
-                                    <span class="text-[10px] sm:text-xs text-white/60">Balance</span>
+                                    <span class="text-xs sm:text-sm text-white/80">Groceries (Budget)</span>
+                                    <span class="text-[10px] sm:text-xs text-white/60">Ksh. 12,000 / mo</span>
                                 </div>
-                                <p class="mt-1 text-xl sm:text-2xl font-semibold text-white">$2,450.00</p>
+                                <p class="mt-1 text-xl sm:text-2xl font-semibold text-white">Spent: Ksh. 2,450.00</p>
+
                                 <!-- simple bars -->
                                 <div class="mt-3 sm:mt-4 grid grid-cols-6 gap-1.5 sm:gap-2 items-end h-24 sm:h-28">
                                     <div class="h-10 rounded bg-gradient-to-t from-white/10 to-white/70"></div>
@@ -128,6 +150,19 @@
                                     <div class="h-20 rounded bg-gradient-to-t from-white/10 to-white/70"></div>
                                     <div class="h-24 rounded bg-gradient-to-t from-white/10 to-white/70"></div>
                                     <div class="h-28 rounded bg-gradient-to-t from-white/10 to-white/70"></div>
+                                </div>
+
+                                <!-- pay action mock -->
+                                <div class="mt-4 p-3 rounded-xl bg-black/20 border border-white/10">
+                                    <div class="flex items-center justify-between">
+                                        <div class="text-white/80 text-xs sm:text-sm">
+                                            Pay from Groceries
+                                            <div class="text-white/60 text-[11px]">Till: 123456</div>
+                                        </div>
+                                        <button class="px-3 py-1.5 rounded-lg bg-[#eca425] text-black text-xs font-semibold hover:opacity-95">
+                                            Pay Ksh. 500
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <p class="mt-3 text-[11px] sm:text-xs text-white/70">Sample data for illustration.</p>
@@ -143,12 +178,12 @@
                         Everything you need to master money
                     </h2>
                     <p class="mt-3 text-zinc-700 dark:text-zinc-300">
-                        Record expenses, set goals, and get clear reports—without spreadsheets.
+                        Track spending, pay merchants, and grow savings—without spreadsheets.
                     </p>
                 </header>
 
                 <div class="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                    <!-- Card 1 -->
+                    <!-- Expense tracking -->
                     <article class="rounded-2xl p-5 bg-white/70 dark:bg-white/10 backdrop-blur-sm ring-1 ring-black/5 dark:ring-white/10">
                         <div class="flex items-center gap-3">
                             <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#0f5334]/10 text-[#0f5334] ring-1 ring-[#0f5334]/20">
@@ -165,7 +200,7 @@
                         </ul>
                     </article>
 
-                    <!-- Card 2 -->
+                    <!-- Payments -->
                     <article class="rounded-2xl p-5 bg-white/70 dark:bg-white/10 backdrop-blur-sm ring-1 ring-black/5 dark:ring-white/10">
                         <div class="flex items-center gap-3">
                             <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#0f5334]/10 text-[#0f5334] ring-1 ring-[#0f5334]/20">
@@ -173,16 +208,16 @@
                                     <path d="M12 3v18M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                                 </svg>
                             </span>
-                            <h3 class="text-base sm:text-lg font-semibold">Savings goals</h3>
+                            <h3 class="text-base sm:text-lg font-semibold">Budget-linked payments</h3>
                         </div>
-                        <p class="mt-3 text-sm text-zinc-700 dark:text-zinc-300">Set monthly targets and watch progress grow.</p>
+                        <p class="mt-3 text-sm text-zinc-700 dark:text-zinc-300">Pay via M-PESA and auto-log every transaction to the right category.</p>
                         <ul class="mt-3 space-y-1.5 text-sm text-zinc-600 dark:text-zinc-300">
-                            <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#0f5334]"></span>Goal progress bars</li>
-                            <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#0f5334]"></span>Cumulative savings tracker</li>
+                            <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#0f5334]"></span>Paybill & Buy Goods (Till)</li>
+                            <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#0f5334]"></span>Pochi la Biashara*</li>
                         </ul>
                     </article>
 
-                    <!-- Card 3 -->
+                    <!-- Savings goals -->
                     <article class="rounded-2xl p-5 bg-white/70 dark:bg-white/10 backdrop-blur-sm ring-1 ring-black/5 dark:ring-white/10">
                         <div class="flex items-center gap-3">
                             <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#0f5334]/10 text-[#0f5334] ring-1 ring-[#0f5334]/20">
@@ -190,16 +225,16 @@
                                     <path d="M4 19h16M4 5h16M8 5v14M16 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                                 </svg>
                             </span>
-                            <h3 class="text-base sm:text-lg font-semibold">Insights &amp; reports</h3>
+                            <h3 class="text-base sm:text-lg font-semibold">Savings goals</h3>
                         </div>
-                        <p class="mt-3 text-sm text-zinc-700 dark:text-zinc-300">Understand trends with monthly and yearly summaries.</p>
+                        <p class="mt-3 text-sm text-zinc-700 dark:text-zinc-300">Monthly targets with clear progress bars and cumulative growth.</p>
                         <ul class="mt-3 space-y-1.5 text-sm text-zinc-600 dark:text-zinc-300">
-                            <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#0f5334]"></span>Category breakdowns</li>
-                            <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#0f5334]"></span>Export CSV/PDF</li>
+                            <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#0f5334]"></span>Goal progress tracking</li>
+                            <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#0f5334]"></span>Auto-savings suggestions</li>
                         </ul>
                     </article>
 
-                    <!-- Card 4 -->
+                    <!-- Insights -->
                     <article class="rounded-2xl p-5 bg-white/70 dark:bg-white/10 backdrop-blur-sm ring-1 ring-black/5 dark:ring-white/10">
                         <div class="flex items-center gap-3">
                             <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#0f5334]/10 text-[#0f5334] ring-1 ring-[#0f5334]/20">
@@ -207,12 +242,12 @@
                                     <path d="M12 17a5 5 0 100-10 5 5 0 000 10zM12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                                 </svg>
                             </span>
-                            <h3 class="text-base sm:text-lg font-semibold">Smart reminders</h3>
+                            <h3 class="text-base sm:text-lg font-semibold">Insights & reports</h3>
                         </div>
-                        <p class="mt-3 text-sm text-zinc-700 dark:text-zinc-300">Email nudges when spending spikes plus monthly recaps.</p>
+                        <p class="mt-3 text-sm text-zinc-700 dark:text-zinc-300">Understand trends with monthly and yearly summaries.</p>
                         <ul class="mt-3 space-y-1.5 text-sm text-zinc-600 dark:text-zinc-300">
-                            <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#0f5334]"></span>High-spend alerts</li>
-                            <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#0f5334]"></span>Monthly summary email</li>
+                            <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#0f5334]"></span>Category breakdowns</li>
+                            <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#0f5334]"></span>Export CSV/PDF</li>
                         </ul>
                     </article>
                 </div>
@@ -220,16 +255,16 @@
                 <!-- How it works -->
                 <div class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
                     <div class="rounded-2xl p-5 bg-white/60 dark:bg-white/10 backdrop-blur-sm ring-1 ring-black/5 dark:ring-white/10">
-                        <h3 class="font-semibold text-[#0f5334]">1. Add transactions</h3>
-                        <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">Log income and expenses with categories like food, rent, or travel.</p>
+                        <h3 class="font-semibold text-[#0f5334]">1. Set budgets</h3>
+                        <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">Create monthly limits for groceries, transport, rent, and more.</p>
                     </div>
                     <div class="rounded-2xl p-5 bg-white/60 dark:bg-white/10 backdrop-blur-sm ring-1 ring-black/5 dark:ring-white/10">
-                        <h3 class="font-semibold text-[#0f5334]">2. Set savings goals</h3>
-                        <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">Choose monthly targets and track cumulative progress automatically.</p>
+                        <h3 class="font-semibold text-[#0f5334]">2. Pay merchants</h3>
+                        <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">Use Paybill, Buy Goods, or Pochi*—we auto-categorize and deduct.</p>
                     </div>
                     <div class="rounded-2xl p-5 bg-white/60 dark:bg-white/10 backdrop-blur-sm ring-1 ring-black/5 dark:ring-white/10">
-                        <h3 class="font-semibold text-[#0f5334]">3. Get insights & alerts</h3>
-                        <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">See monthly/yearly summaries and receive email reminders when spending spikes.</p>
+                        <h3 class="font-semibold text-[#0f5334]">3. Track & save</h3>
+                        <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">Get monthly/yearly insights and email nudges when spending spikes.</p>
                     </div>
                 </div>
 
@@ -247,6 +282,24 @@
                 </div>
             </section>
 
+            <!-- FAQ mini -->
+            <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="rounded-2xl p-5 bg-white/70 dark:bg-white/10 backdrop-blur-sm ring-1 ring-black/5 dark:ring-white/10">
+                        <h4 class="font-semibold text-[#0f5334]">Do I need M-PESA?</h4>
+                        <p class="mt-1.5 text-sm text-zinc-700 dark:text-zinc-300">No—tracking works offline. Payments use your M-PESA wallet when enabled.</p>
+                    </div>
+                    <div class="rounded-2xl p-5 bg-white/70 dark:bg-white/10 backdrop-blur-sm ring-1 ring-black/5 dark:ring-white/10">
+                        <h4 class="font-semibold text-[#0f5334]">Are payments secure?</h4>
+                        <p class="mt-1.5 text-sm text-zinc-700 dark:text-zinc-300">We use secure provider APIs and never store card/PIN data.</p>
+                    </div>
+                    <div class="rounded-2xl p-5 bg-white/70 dark:bg-white/10 backdrop-blur-sm ring-1 ring-black/5 dark:ring-white/10">
+                        <h4 class="font-semibold text-[#0f5334]">What about Pochi?</h4>
+                        <p class="mt-1.5 text-sm text-zinc-700 dark:text-zinc-300">Supported via partner/aggregator where available. Paybill & Till work everywhere.</p>
+                    </div>
+                </div>
+            </section>
+
             <!-- CTA -->
             <section>
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -256,7 +309,7 @@
                                 Ready to see where your money goes?
                             </h3>
                             <p class="mt-2 text-sm sm:text-base text-zinc-700 dark:text-zinc-300">
-                                Create your account in minutes and start tracking today.
+                                Create your account in minutes and start tracking—and paying—today.
                             </p>
                         </div>
                         <div class="w-full md:w-auto flex flex-col sm:flex-row gap-3">
