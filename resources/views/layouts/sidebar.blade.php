@@ -2,8 +2,7 @@
 <div
     x-cloak
     :class="{ '!translate-x-0' : open }"
-    class="fixed md:relative top-0 left-0 z-40 w-9/12 sm:w-64 h-screen flex flex-col
-           bg-white/70 dark:bg-white/10 backdrop-blur-xl
+    class="fixed md:relative top-0 left-0 z-40 w-9/12 sm:w-64 md:w-72 h-screen md:h-auto md:self-stretch flex flex-col bg-white/70 dark:bg-white/10 backdrop-blur-xl
            transform -translate-x-full md:translate-x-0 transition duration-300 ease-in-out
            md:flex-shrink-0">
 
@@ -43,9 +42,9 @@
                         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
                     </svg> </x-slot:icon> Settings </x-sidebar-nav-link>
             <!-- TODO: To be checked -->
-            <!-- <x-sidebar-nav-link :href="route('profile')" :active="request()->routeIs('profile')"> <x-slot:icon> <svg class="w-4 h-4 mr-3" viewBox="0 0 24 24" fill="none">
+            <x-sidebar-nav-link :href="route('profile')" :active="request()->routeIs('profile')"> <x-slot:icon> <svg class="w-4 h-4 mr-3" viewBox="0 0 24 24" fill="none">
                         <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm7 9H5a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4z" stroke="currentColor" stroke-width="2" />
-                    </svg> </x-slot:icon> Profile </x-sidebar-nav-link>  -->
+                    </svg> </x-slot:icon> Profile </x-sidebar-nav-link>
         </nav>
     </div>
 
@@ -64,17 +63,17 @@
             </div>
         </div>
 
-       <!-- Sign out -->
-<form method="POST" action="{{ route('logout') }}" class="px-4 pb-4">
-    @csrf
-    <button type="submit" class="flex items-center w-full text-left px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
-        <svg class="w-4 h-4 mr-3" viewBox="0 0 24 24" fill="none">
-            <path d="M17 16l4-4m0 0l-4-4m4 4H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-            <path d="M12 19a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2h4a2 2 0 012 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
-        {{ __('Sign out') }}
-    </button>
-</form>
+        <!-- Sign out -->
+        <form method="POST" action="{{ route('logout') }}" class="px-4 pb-4">
+            @csrf
+            <button type="submit" class="flex items-center w-full text-left px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
+                <svg class="w-4 h-4 mr-3" viewBox="0 0 24 24" fill="none">
+                    <path d="M17 16l4-4m0 0l-4-4m4 4H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <path d="M12 19a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2h4a2 2 0 012 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                {{ __('Sign out') }}
+            </button>
+        </form>
 
     </div>
 </div>

@@ -34,7 +34,7 @@
         Skip to content
     </a>
 
-    <div class="min-h-screen flex">
+    <div class="min-h-screen flex items-stretch">
         <!-- Sidebar (now part of the main flex container) -->
         @include('layouts.sidebar')
 
