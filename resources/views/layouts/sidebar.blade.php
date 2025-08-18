@@ -64,18 +64,17 @@
             </div>
         </div>
 
-        <!-- Sign out -->
-        <form method="POST" action="{{ route('logout') }}" class="px-4 pb-4">
-            @csrf
-            <x-sidebar-nav-link as="button" type="submit">
-                <x-slot:icon>
-                    <svg class="w-4 h-4 mr-3" viewBox="0 0 24 24" fill="none">
-                        <path d="M17 16l4-4m0 0l-4-4m4 4H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <path d="M12 19a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2h4a2 2 0 012 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                </x-slot:icon>
-                Sign out
-            </x-sidebar-nav-link>
-        </form>
+       <!-- Sign out -->
+<form method="POST" action="{{ route('logout') }}" class="px-4 pb-4">
+    @csrf
+    <button type="submit" class="flex items-center w-full text-left px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
+        <svg class="w-4 h-4 mr-3" viewBox="0 0 24 24" fill="none">
+            <path d="M17 16l4-4m0 0l-4-4m4 4H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <path d="M12 19a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2h4a2 2 0 012 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        {{ __('Sign out') }}
+    </button>
+</form>
+
     </div>
 </div>

@@ -15,7 +15,7 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->get('/app/profile');
+        $response = $this->actingAs($user)->get('/profile');
 
         $response
             ->assertOk()
