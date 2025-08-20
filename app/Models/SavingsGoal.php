@@ -9,13 +9,9 @@ class SavingsGoal extends Model
 {
     use HasFactory;
 
+    // Columns: user_id, name, target_amount, monthly_target, start_date, end_date
     protected $fillable = [
-        'user_id',
-        'name',
-        'target_amount',
-        'monthly_target',
-        'start_date',
-        'end_date',
+        'user_id','name','target_amount','monthly_target','start_date','end_date',
     ];
 
     protected $casts = [
@@ -25,43 +21,24 @@ class SavingsGoal extends Model
         'end_date'       => 'date',
     ];
 
-    /* -----------------------
-     | Relations
-     * ---------------------*/
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    // Relations
+    public function user()           { return $this->belongsTo(User::class); }
+    public function contributions()  { return $this->hasMany(SavingsContribution::class); }
 
-    public function contributions()
-    {
-        return $this->hasMany(SavingsContribution::class);
-    }
-
-    /* -----------------------
-     | Accessors
-     * ---------------------*/
+    // Accessors
     public function getCurrentAmountAttribute(): float
     {
-        // Sum on a loaded relationship if available (prevents N+1), else query.
-        if ($this->relationLoaded('contributions')) {
-            return (float) $this->contributions->sum('amount');
-        }
-        return (float) $this->contributions()->sum('amount');
+        return (float) ($this->relationLoaded('contributions')
+            ? $this->contributions->sum('amount')
+            : $this->contributions()->sum('amount'));
     }
 
     public function getProgressPercentAttribute(): float
     {
         $target = (float) ($this->target_amount ?? 0);
-        if ($target <= 0) return 0.0;
-        return min(100, round(($this->current_amount / $target) * 100, 2));
+        return $target > 0 ? min(100, round(($this->current_amount / $target) * 100, 2)) : 0.0;
     }
 
-    /* -----------------------
-     | Scopes
-     * ---------------------*/
-    public function scopeForUser($query, int $userId)
-    {
-        return $query->where('user_id', $userId);
-    }
+    // Scopes
+    public function scopeForUser($q, int $userId) { return $q->where('user_id', $userId); }
 }

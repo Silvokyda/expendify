@@ -9,47 +9,29 @@ class SavingsContribution extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'savings_goal_id',
-        'amount',
-        'contributed_at',
-    ];
+    // Columns: user_id, savings_goal_id, amount, contributed_at
+    protected $fillable = ['user_id','savings_goal_id','amount','contributed_at'];
 
     protected $casts = [
         'amount'         => 'decimal:2',
         'contributed_at' => 'date',
     ];
 
-    /* -----------------------
-     | Relations
-     * ---------------------*/
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    // Relations
+    public function user() { return $this->belongsTo(User::class); }
 
     public function goal()
     {
         return $this->belongsTo(SavingsGoal::class, 'savings_goal_id');
     }
 
-    /* -----------------------
-     | Scopes
-     * ---------------------*/
-    public function scopeForUser($query, int $userId)
-    {
-        return $query->where('user_id', $userId);
-    }
+    // Scopes
+    public function scopeForUser($q, int $userId) { return $q->where('user_id', $userId); }
+    public function scopeForGoal($q, int $goalId) { return $q->where('savings_goal_id', $goalId); }
 
-    public function scopeForGoal($query, int $goalId)
+    public function scopeInMonth($q, int $year, int $month)
     {
-        return $query->where('savings_goal_id', $goalId);
+        return $q->whereYear('contributed_at', $year)
+                 ->whereMonth('contributed_at', $month);
     }
-
-    public function scopeInMonth($query, int $year, int $month)
-    {
-        return $query->whereYear('contributed_at', $year)
-                     ->whereMonth('contributed_at', $month);
-	}
 }

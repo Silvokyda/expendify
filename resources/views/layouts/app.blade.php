@@ -26,6 +26,10 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:site_name" content="Expendify">
+    <script>
+        window.csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    </script>
+
 </head>
 
 <body class="antialiased font-sans bg-paper text-[#212529] dark:text-white selection:bg-[#0f5334]/20" x-data="{ open: false }">
@@ -42,6 +46,7 @@
         <div class="flex-1 flex flex-col min-w-0">
             <!-- PAGE CONTENT -->
             <main id="main" class="flex-1">
+                @include('components.flash')
                 <!-- PAGE HEADING -->
                 <div class="mx-auto px-4 sm:px-6 lg:px-8 mt-4">
                     <div class="rounded-2xl p-4 sm:p-5 bg-white/70 dark:bg-white/10 backdrop-blur-sm ring-1 ring-black/5 dark:ring-white/10">

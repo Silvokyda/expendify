@@ -10,13 +10,9 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    // Columns: user_id, category_id, type(income|expense), amount, occurred_at, note
     protected $fillable = [
-        'user_id',
-        'category_id',
-        'type',        // income|expense
-        'amount',
-        'occurred_at',
-        'note',
+        'user_id','category_id','type','amount','occurred_at','note',
     ];
 
     protected $casts = [
@@ -24,45 +20,26 @@ class Transaction extends Model
         'occurred_at' => 'date',
     ];
 
-    /* -----------------------
-     | Relations
-     * ---------------------*/
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    // Relations
+    public function user()     { return $this->belongsTo(User::class); }
+    public function category() { return $this->belongsTo(Category::class); }
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
+    // Scopes
+    public function scopeForUser(Builder $q, int $userId): Builder
+    { return $q->where('user_id', $userId); }
 
-    /* -----------------------
-     | Scopes
-     * ---------------------*/
-    public function scopeForUser(Builder $query, int $userId): Builder
-    {
-        return $query->where('user_id', $userId);
-    }
+    public function scopeIncome(Builder $q): Builder
+    { return $q->where('type', 'income'); }
 
-    public function scopeIncome(Builder $query): Builder
-    {
-        return $query->where('type', 'income');
-    }
+    public function scopeExpense(Builder $q): Builder
+    { return $q->where('type', 'expense'); }
 
-    public function scopeExpense(Builder $query): Builder
-    {
-        return $query->where('type', 'expense');
-    }
+    public function scopeBetweenDates(Builder $q, $start, $end): Builder
+    { return $q->whereBetween('occurred_at', [$start, $end]); }
 
-    public function scopeBetweenDates(Builder $query, $start, $end): Builder
+    public function scopeInMonth(Builder $q, int $year, int $month): Builder
     {
-        return $query->whereBetween('occurred_at', [$start, $end]);
-    }
-
-    public function scopeInMonth(Builder $query, int $year, int $month): Builder
-    {
-        return $query->whereYear('occurred_at', $year)
-                     ->whereMonth('occurred_at', $month);
+        return $q->whereYear('occurred_at', $year)
+                 ->whereMonth('occurred_at', $month);
     }
 }
