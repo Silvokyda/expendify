@@ -22,25 +22,27 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Default categories
-        $categories = [
-            ['name'=>'Salary','type'=>'income'],
-            ['name'=>'Freelance','type'=>'income'],
-            ['name'=>'Food','type'=>'expense'],
-            ['name'=>'Rent','type'=>'expense'],
-            ['name'=>'Transport','type'=>'expense'],
-            ['name'=>'Travel','type'=>'expense'],
-            ['name'=>'Utilities','type'=>'expense'],
-            ['name'=>'Entertainment','type'=>'expense'],
-            ['name'=>'Health','type'=>'expense'],
-            ['name'=>'Education','type'=>'expense'],
-            ['name'=>'Misc','type'=>'expense'],
-        ];
+       // Default (global) categories available to everyone, with icons
+$defaults = [
+    ['name'=>'Salary',       'type'=>'income',  'icon'=> 'ph:money'],
+    ['name'=>'Freelance',    'type'=>'income',  'icon'=> 'ph:briefcase'],
+    ['name'=>'Food',         'type'=>'expense', 'icon'=> 'ph:fork-knife'],
+    ['name'=>'Rent',         'type'=>'expense', 'icon'=> 'ph:house'],
+    ['name'=>'Transport',    'type'=>'expense', 'icon'=> 'ph:car'],
+    ['name'=>'Travel',       'type'=>'expense', 'icon'=> 'ph:airplane'],
+    ['name'=>'Utilities',    'type'=>'expense', 'icon'=> 'ph:plug'],
+    ['name'=>'Entertainment','type'=>'expense', 'icon'=> 'ph:film-strip'],
+    ['name'=>'Health',       'type'=>'expense', 'icon'=> 'ph:heartbeat'],
+    ['name'=>'Education',    'type'=>'expense', 'icon'=> 'ph:book'],
+    ['name'=>'Emergency Fund','type'=>'saving', 'icon'=> 'ph:piggy-bank'],
+];
 
-        foreach ($categories as $cat) {
-            Category::firstOrCreate(
-                ['user_id' => $user->id, 'name' => $cat['name'], 'type' => $cat['type']]
-            );
-        }
+foreach ($defaults as $cat) {
+    Category::firstOrCreate(
+        ['user_id' => null, 'name' => $cat['name'], 'type' => $cat['type']],
+        ['icon' => $cat['icon']]
+    );
+}
+
     }
 }

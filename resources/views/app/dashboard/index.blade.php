@@ -28,7 +28,7 @@
                         <p class="text-emerald-100/90 mb-6">
                             Set limits for groceries, rent, and other spending categories to track expenses and payments.
                         </p>
-                        <a href="{{ route('onboarding.show') }}"
+                        <a href="{{ route('budgets.create') }}"
                            class="inline-flex items-center rounded-md bg-amber-400 hover:bg-amber-300 text-emerald-900 font-semibold px-4 py-2 transition">
                             Create a budget
                         </a>
@@ -36,6 +36,7 @@
                 </div>
 
                 <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    @includeIf('app.dashboard.partials.charts')
                     {{-- Recent expenses --}}
                     <div class="rounded-xl bg-stone-50 dark:bg-white/5 p-5 ring-1 ring-black/5 dark:ring-white/10">
                         <h3 class="font-semibold text-stone-800 dark:text-stone-100">Recent expenses</h3>
@@ -62,6 +63,7 @@
 
                 <div class="flex items-center justify-between mb-4">
                     <div>
+                        
                         <p class="text-sm text-gray-500 dark:text-gray-400">This month</p>
                         @if($totalBudget > 0)
                             <h3 class="text-xl font-semibold text-gray-800 dark:text-white">
@@ -76,9 +78,9 @@
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <a href="{{ route('transactions.create') }}"
+                        <a href="{{ route('budgets.create') }}"
                            class="inline-flex items-center rounded-md bg-emerald-600 text-white hover:bg-emerald-500 px-3 py-2 text-sm font-medium">
-                            + Add Expense
+                            + Create Budget
                         </a>
                         @if($hasWallet)
                             <a href="{{ route('payouts.create') }}"

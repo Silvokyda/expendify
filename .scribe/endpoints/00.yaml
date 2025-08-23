@@ -147,7 +147,7 @@ endpoints:
         name: name
         description: 'Must not be greater than 100 characters.'
         required: true
-        example: vmqeopfuudtdsufvyvddq
+        example: b
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -157,7 +157,7 @@ endpoints:
         name: type
         description: ''
         required: false
-        example: income
+        example: expense
         type: string
         enumValues:
           - income
@@ -169,16 +169,16 @@ endpoints:
         name: color
         description: 'optional if you use typed categories. Must not be greater than 20 characters.'
         required: false
-        example: amniihfqcoynlazgh
+        example: ngzmiyvdljnikhwa
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         custom: []
     cleanBodyParameters:
-      name: vmqeopfuudtdsufvyvddq
-      type: income
-      color: amniihfqcoynlazgh
+      name: b
+      type: expense
+      color: ngzmiyvdljnikhwa
     fileParameters: []
     responses: []
     responseFields: []
@@ -276,7 +276,7 @@ endpoints:
         name: name
         description: 'Must not be greater than 100 characters.'
         required: false
-        example: vmqeopfuudtdsufvyvddq
+        example: b
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -286,7 +286,7 @@ endpoints:
         name: type
         description: ''
         required: false
-        example: income
+        example: expense
         type: string
         enumValues:
           - income
@@ -298,16 +298,16 @@ endpoints:
         name: color
         description: 'Must not be greater than 20 characters.'
         required: false
-        example: amniihfqcoynlazgh
+        example: ngzmiyvdljnikhwa
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         custom: []
     cleanBodyParameters:
-      name: vmqeopfuudtdsufvyvddq
-      type: income
-      color: amniihfqcoynlazgh
+      name: b
+      type: expense
+      color: ngzmiyvdljnikhwa
     fileParameters: []
     responses: []
     responseFields: []
@@ -436,7 +436,7 @@ endpoints:
         name: amount
         description: 'Must be at least 0.'
         required: true
-        example: 73
+        example: 27
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -456,7 +456,7 @@ endpoints:
         name: note
         description: 'Must not be greater than 500 characters.'
         required: false
-        example: mqeopfuudtdsufvyvddqa
+        example: 'n'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -466,7 +466,7 @@ endpoints:
         name: date
         description: 'Must be a valid date.'
         required: true
-        example: '2025-08-19T14:23:17'
+        example: '2025-08-23T12:16:11'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -474,9 +474,9 @@ endpoints:
         custom: []
     cleanBodyParameters:
       type: income
-      amount: 73
-      note: mqeopfuudtdsufvyvddqa
-      date: '2025-08-19T14:23:17'
+      amount: 27
+      note: 'n'
+      date: '2025-08-23T12:16:11'
     fileParameters: []
     responses: []
     responseFields: []
@@ -507,14 +507,14 @@ endpoints:
         name: id
         description: 'The ID of the transaction.'
         required: true
-        example: 17
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 17
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -559,14 +559,14 @@ endpoints:
         name: id
         description: 'The ID of the transaction.'
         required: true
-        example: 17
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 17
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -586,7 +586,7 @@ endpoints:
         name: amount
         description: 'Must be at least 0.'
         required: false
-        example: 73
+        example: 27
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -606,7 +606,7 @@ endpoints:
         name: note
         description: 'Must not be greater than 500 characters.'
         required: false
-        example: mqeopfuudtdsufvyvddqa
+        example: 'n'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -616,7 +616,7 @@ endpoints:
         name: date
         description: 'Must be a valid date.'
         required: false
-        example: '2025-08-19T14:23:17'
+        example: '2025-08-23T12:16:11'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -624,9 +624,9 @@ endpoints:
         custom: []
     cleanBodyParameters:
       type: expense
-      amount: 73
-      note: mqeopfuudtdsufvyvddqa
-      date: '2025-08-19T14:23:17'
+      amount: 27
+      note: 'n'
+      date: '2025-08-23T12:16:11'
     fileParameters: []
     responses: []
     responseFields: []
@@ -657,14 +657,14 @@ endpoints:
         name: id
         description: 'The ID of the transaction.'
         required: true
-        example: 17
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 17
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -743,7 +743,7 @@ endpoints:
         name: name
         description: 'Must not be greater than 120 characters.'
         required: true
-        example: vmqeopfuudtdsufvyvddq
+        example: b
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -753,7 +753,7 @@ endpoints:
         name: target_amount
         description: 'Must be at least 0.'
         required: true
-        example: 1
+        example: 39
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -763,7 +763,7 @@ endpoints:
         name: monthly_target
         description: 'Must be at least 0.'
         required: false
-        example: 45
+        example: 84
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -773,17 +773,17 @@ endpoints:
         name: due_date
         description: 'Must be a valid date.'
         required: false
-        example: '2025-08-19T14:23:17'
+        example: '2025-08-23T12:16:11'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         custom: []
     cleanBodyParameters:
-      name: vmqeopfuudtdsufvyvddq
-      target_amount: 1
-      monthly_target: 45
-      due_date: '2025-08-19T14:23:17'
+      name: b
+      target_amount: 39
+      monthly_target: 84
+      due_date: '2025-08-23T12:16:11'
     fileParameters: []
     responses: []
     responseFields: []
@@ -814,14 +814,14 @@ endpoints:
         name: id
         description: 'The ID of the savings goal.'
         required: true
-        example: 17
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 17
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -866,14 +866,14 @@ endpoints:
         name: id
         description: 'The ID of the savings goal.'
         required: true
-        example: 17
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 17
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -881,7 +881,7 @@ endpoints:
         name: name
         description: 'Must not be greater than 120 characters.'
         required: false
-        example: vmqeopfuudtdsufvyvddq
+        example: b
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -891,7 +891,7 @@ endpoints:
         name: target_amount
         description: 'Must be at least 0.'
         required: false
-        example: 1
+        example: 39
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -901,7 +901,7 @@ endpoints:
         name: monthly_target
         description: 'Must be at least 0.'
         required: false
-        example: 45
+        example: 84
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -911,17 +911,17 @@ endpoints:
         name: due_date
         description: 'Must be a valid date.'
         required: false
-        example: '2025-08-19T14:23:17'
+        example: '2025-08-23T12:16:11'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         custom: []
     cleanBodyParameters:
-      name: vmqeopfuudtdsufvyvddq
-      target_amount: 1
-      monthly_target: 45
-      due_date: '2025-08-19T14:23:17'
+      name: b
+      target_amount: 39
+      monthly_target: 84
+      due_date: '2025-08-23T12:16:11'
     fileParameters: []
     responses: []
     responseFields: []
@@ -952,14 +952,14 @@ endpoints:
         name: id
         description: 'The ID of the savings goal.'
         required: true
-        example: 17
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 17
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1038,7 +1038,7 @@ endpoints:
         name: savings_goal_id
         description: 'The <code>id</code> of an existing record in the savings_goals table.'
         required: true
-        example: consequatur
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1048,7 +1048,7 @@ endpoints:
         name: amount
         description: 'Must be at least 0.'
         required: true
-        example: 45
+        example: 39
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -1058,7 +1058,7 @@ endpoints:
         name: date
         description: 'Must be a valid date.'
         required: true
-        example: '2025-08-19T14:23:17'
+        example: '2025-08-23T12:16:11'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1068,17 +1068,17 @@ endpoints:
         name: note
         description: 'Must not be greater than 500 characters.'
         required: false
-        example: qeopfuudtdsufvyvddqam
+        example: g
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         custom: []
     cleanBodyParameters:
-      savings_goal_id: consequatur
-      amount: 45
-      date: '2025-08-19T14:23:17'
-      note: qeopfuudtdsufvyvddqam
+      savings_goal_id: architecto
+      amount: 39
+      date: '2025-08-23T12:16:11'
+      note: g
     fileParameters: []
     responses: []
     responseFields: []
@@ -1109,14 +1109,14 @@ endpoints:
         name: id
         description: 'The ID of the savings contribution.'
         required: true
-        example: 17
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 17
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1161,14 +1161,14 @@ endpoints:
         name: id
         description: 'The ID of the savings contribution.'
         required: true
-        example: 17
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 17
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -1176,7 +1176,7 @@ endpoints:
         name: amount
         description: 'Must be at least 0.'
         required: false
-        example: 73
+        example: 27
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -1186,7 +1186,7 @@ endpoints:
         name: date
         description: 'Must be a valid date.'
         required: false
-        example: '2025-08-19T14:23:17'
+        example: '2025-08-23T12:16:11'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1196,16 +1196,16 @@ endpoints:
         name: note
         description: 'Must not be greater than 500 characters.'
         required: false
-        example: mqeopfuudtdsufvyvddqa
+        example: 'n'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         custom: []
     cleanBodyParameters:
-      amount: 73
-      date: '2025-08-19T14:23:17'
-      note: mqeopfuudtdsufvyvddqa
+      amount: 27
+      date: '2025-08-23T12:16:11'
+      note: 'n'
     fileParameters: []
     responses: []
     responseFields: []
@@ -1236,14 +1236,14 @@ endpoints:
         name: id
         description: 'The ID of the savings contribution.'
         required: true
-        example: 17
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 17
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

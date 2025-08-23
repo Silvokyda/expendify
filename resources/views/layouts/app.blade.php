@@ -45,45 +45,17 @@
         <!-- Main content area -->
         <div class="flex-1 flex flex-col min-w-0">
             <!-- PAGE CONTENT -->
-            <main id="main" class="flex-1">
-                @include('components.flash')
-                <!-- PAGE HEADING -->
-                <div class="mx-auto px-4 sm:px-6 lg:px-8 mt-4">
-                    <div class="rounded-2xl p-4 sm:p-5 bg-white/70 dark:bg-white/10 backdrop-blur-sm ring-1 ring-black/5 dark:ring-white/10">
-                        @isset($header)
-                        <div class="flex items-center justify-between">
-                            <!-- Mobile: Logo + Toggle (left side) -->
-                            <div class="flex items-center md:hidden gap-3">
-                                <button
-                                    class="rounded-md p-2 hover:bg-black/5 dark:hover:bg-white/10"
-                                    @click="open = true"
-                                    aria-label="Open sidebar">
-                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
-                                        <path d="M4 6h16M4 12h12M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                                    </svg>
-                                </button>
-                                <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 min-w-0">
-                                    <img src="{{ asset('images/logos/logo_transparent.png') }}" alt="" class="h-9 w-auto" />
-                                    <span class="text-lg font-semibold tracking-tight text-[#0f5334] dark:text-white truncate">
-                                        {{ config('app.name', 'Expendify') }}
-                                    </span>
-                                </a>
-                            </div>
-
-                            <!-- Header text (right side on mobile, full width on desktop) -->
-                            <div class="text-xl sm:text-2xl font-semibold text-[#0f5334] dark:text-white md:text-left">
-                                {{ $header }}
-                            </div>
-                        </div>
-                        @endisset
-                    </div>
-                </div>
-
-                <!-- MAIN CONTENT -->
-                <div class="mx-auto px-4 sm:px-6 lg:px-8 py-6">
-                    {{ $slot }}
-                </div>
-            </main>
+            <main class="flex-1">
+        <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+            @if (trim($__env->yieldContent('content')))
+                {{-- Section-style layout: @extends('layouts.app') --}}
+                @yield('content')
+            @elseif (isset($slot))
+                {{-- Component-style layout: <x-app-layout> --}}
+                {{ $slot }}
+            @endif
+        </div>
+    </main>
 
             <!-- FOOTER -->
             <footer class="mt-auto">

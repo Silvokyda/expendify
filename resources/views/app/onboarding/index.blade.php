@@ -114,7 +114,7 @@
                 </div>
 
                 <div class="mt-6 text-right">
-                    <a href="{{ route('onboarding.show', ['step' => 2]) }}"
+                    <a href="{{ route('budgets.create', ['step' => 2]) }}"
                         class="text-sm text-gray-600 dark:text-gray-300 underline">Next: Wallet →</a>
                 </div>
 
@@ -276,7 +276,7 @@
                         <button class="px-4 py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-500">
                             Create Wallet
                         </button>
-                        <a href="{{ route('onboarding.show', ['step' => 1]) }}" class="text-sm underline text-gray-600 dark:text-gray-300">
+                        <a href="{{ route('budgets.create', ['step' => 1]) }}" class="text-sm underline text-gray-600 dark:text-gray-300">
                             Back
                         </a>
                     </div>
@@ -297,7 +297,7 @@
                         <button class="px-4 py-2 rounded-md bg-stone-100 dark:bg-white/10 text-gray-800 dark:text-gray-200 hover:bg-stone-200 dark:hover:bg-white/20">
                             Continue without wallet
                         </button>
-                        <a href="{{ route('onboarding.show', ['step' => 1]) }}" class="text-sm underline text-gray-600 dark:text-gray-300">
+                        <a href="{{ route('budgets.create', ['step' => 1]) }}" class="text-sm underline text-gray-600 dark:text-gray-300">
                             Back
                         </a>
                     </div>

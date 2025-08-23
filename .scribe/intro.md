@@ -3,7 +3,7 @@
 
 
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost:8000</code>
+    <strong>Base URL</strong>: <code>http://localhost</code>
 </aside>
 
 Welcome to the **Expendify API** documentation.  
