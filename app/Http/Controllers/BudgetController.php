@@ -16,7 +16,7 @@ class BudgetController extends Controller
         return view('app.budgets.index', compact('budgets'));
     }
 
-    /** Step 1 (GET): name + timeframe + total. Also routes step=2/3 safely. */
+    /** Step 1 (GET) + step router */
     public function create(Request $request)
     {
         $step = (int) $request->query('step', 1);
@@ -31,21 +31,14 @@ class BudgetController extends Controller
         }
 
         if ($step === 3) {
-            if (
-                !$request->session()->has('budget_wizard.step1') ||
-                !$request->session()->has('budget_wizard.items')
-            ) {
-                return redirect()
-                    ->route('budgets.create')
-                    ->with('status', 'Start by filling Step 1.');
-            }
             return $this->review($request);
         }
 
+        // Step 1 view
         return view('app.budgets.create-step1');
     }
 
-    /** POST Step 1 → store in session, go to Step 2 */
+    /** POST Step 1 */
     public function storeStep1(Request $request)
     {
         $data = $request->validate([
@@ -56,28 +49,21 @@ class BudgetController extends Controller
             'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
         ]);
 
-        if ($data['period'] !== 'custom') {
-            $data['start_date'] = null;
-            $data['end_date'] = null;
-        }
-
         $request->session()->put('budget_wizard.step1', $data);
-        // clear later steps if user restarted
-        $request->session()->forget('budget_wizard.items');
 
         return redirect()->route('budgets.create', ['step' => 2]);
     }
 
-    /** GET Step 2 page */
+    /** GET Step 2 (internal) */
     protected function step2(Request $request)
     {
-        $user = $request->user();
-        $categories = Category::forUser($user->id)
-            ->orderBy('type')->orderBy('name')
-            ->get(['id', 'name', 'type', 'icon', 'user_id']);
+        $categories = Category::query()
+            ->where(fn($q) => $q->where('user_id', $request->user()->id)->orWhereNull('user_id'))
+            ->orderBy('name')
+            ->get();
 
-        $savingsGoals = method_exists($user, 'savingsGoals')
-            ? $user->savingsGoals()->orderBy('name')->get(['id', 'name', 'target_amount'])
+        $savingsGoals = method_exists($request->user(), 'savingsGoals')
+            ? $request->user()->savingsGoals()->orderBy('name')->get()
             : collect();
 
         $step1 = $request->session()->get('budget_wizard.step1');
@@ -186,7 +172,6 @@ class BudgetController extends Controller
         $user = $request->user();
 
         $budget = DB::transaction(function () use ($user, $step1, $items) {
-            /** @var Budget $budget */
             $budget = Budget::create([
                 'user_id' => $user->id,
                 'name' => $step1['name'],
@@ -216,85 +201,133 @@ class BudgetController extends Controller
 
         return redirect()->route('dashboard')->with('status', 'Budget “' . $budget->name . '” activated.');
     }
-        /**
-     * View a single budget (category) with period spending and transactions.
-     */
-    public function show(Request $request, Category $budget)
+
+    /** NEW: budgets.show */
+    public function show(Request $request, Budget $budget)
     {
-        $this->authorizeBudget($request, $budget);
+        abort_if($budget->user_id !== $request->user()->id, 403);
 
-        // Period selection: monthly | weekly | custom (YYYY-MM-DD .. YYYY-MM-DD)
-        $period = $request->query('period', 'monthly');
-        $now    = Carbon::now();
+        $budget = Budget::query()
+            ->whereKey($budget->id)
+            ->with(['items.category', 'items.savingsGoal'])
+            ->firstOrFail();
 
-        if ($period === 'weekly') {
-            $start = (clone $now)->startOfWeek(Carbon::MONDAY);
-            $end   = (clone $now)->endOfWeek(Carbon::SUNDAY);
-        } elseif ($period === 'custom') {
-            $start = Carbon::parse($request->query('start', $now->startOfMonth()->toDateString()))->startOfDay();
-            $end   = Carbon::parse($request->query('end',   $now->endOfMonth()->toDateString()))->endOfDay();
-        } else {
-            $period = 'monthly';
-            $start  = (clone $now)->startOfMonth();
-            $end    = (clone $now)->endOfMonth();
-        }
+        return view('app.budgets.show', compact('budget'));
+    }
 
-        // Active non-monthly budgets overlapping the window (weekly/custom)
-        $extraBudgets = CategoryBudget::query()
-            ->where('user_id', $request->user()->id)
-            ->where('category_id', $budget->id)
-            ->where('is_active', true)
-            ->where(function ($q) use ($start, $end) {
-                $q->where(function ($qq) use ($start, $end) {
-                    $qq->whereNull('end_date')
-                       ->whereDate('start_date', '<=', $end->toDateString());
-                })->orWhere(function ($qq) use ($start, $end) {
-                    $qq->whereDate('start_date', '<=', $end->toDateString())
-                       ->whereDate('end_date', '>=', $start->toDateString());
-                });
-            })
-            ->orderByDesc('created_at')
+    /** NEW: budgets.edit */
+    public function edit(Request $request, Budget $budget)
+    {
+        abort_if($budget->user_id !== $request->user()->id, 403);
+
+        $budget->load(['items.category']);
+
+        $categories = Category::query()
+            ->where(fn($q) => $q->where('user_id', $request->user()->id)->orWhereNull('user_id'))
+            ->whereIn('type', ['expense', 'both']) // expense-only allocations by design
+            ->orderBy('name')
             ->get();
 
-        // Choose a limit for the current view: prefer matching period else fallback to monthly_limit
-        $periodMatch = $extraBudgets->firstWhere('period', $period);
-        $activeLimit = $periodMatch ? (float)$periodMatch->amount : (float)($budget->monthly_limit ?? 0);
-
-        // Transactions for this category & window
-        $transactions = Transaction::where('user_id', $request->user()->id)
-            ->where('type', 'expense')
-            ->where('category_id', $budget->id)
-            ->whereBetween('occurred_at', [$start->toDateString(), $end->toDateString()])
-            ->latest('occurred_at')
-            ->paginate(15);
-
-        $spent = (float) Transaction::where('user_id', $request->user()->id)
-            ->where('type', 'expense')
-            ->where('category_id', $budget->id)
-            ->whereBetween('occurred_at', [$start->toDateString(), $end->toDateString()])
-            ->sum('amount');
-
-        return view('app.budgets.show', [
-            'budget'       => $budget,
-            'period'       => $period,
-            'start'        => $start,
-            'end'          => $end,
-            'transactions' => $transactions,
-            'spent'        => $spent,
-            'activeLimit'  => $activeLimit,
-            'extraBudgets' => $extraBudgets,
-        ]);
+        return view('app.budgets.edit', compact('budget', 'categories'));
     }
 
-    private function authorizeBudget(Request $request, Category $budget): void
+    /** NEW: budgets.update */
+    public function update(Request $request, Budget $budget)
     {
-        abort_unless($budget->user_id === $request->user()->id, 403);
+        abort_if($budget->user_id !== $request->user()->id, 403);
+
+        $base = $request->validate([
+            'name' => ['required', 'string', 'max:64'],
+            'period' => ['required', 'in:monthly,weekly,custom'],
+            'total_amount' => ['required', 'numeric', 'min:0'],
+            'start_date' => ['nullable', 'date'],
+            'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
+            'is_active' => ['sometimes', 'boolean'],
+        ]);
+
+        $allocs = $request->input('allocs', []);
+        $allocsNew = $request->input('allocs_new', []);
+        $newCategories = $request->input('new_categories', []);
+
+        DB::transaction(function () use ($budget, $base, $allocs, $allocsNew, $newCategories, $request) {
+            $budget->update([
+                'name' => $base['name'],
+                'period' => $base['period'],
+                'total_amount' => $base['total_amount'],
+                'start_date' => $base['start_date'] ?? null,
+                'end_date' => $base['end_date'] ?? null,
+                'is_active' => (bool) ($base['is_active'] ?? $budget->is_active),
+            ]);
+
+            // Soft delete flags for existing items
+            $idsToDelete = [];
+            foreach ($allocs as $a) {
+                if (!empty($a['id']) && !empty($a['_delete'])) {
+                    $idsToDelete[] = (int) $a['id'];
+                }
+            }
+            if ($idsToDelete) {
+                BudgetItem::query()
+                    ->where('budget_id', $budget->id)
+                    ->whereIn('id', $idsToDelete)
+                    ->delete();
+            }
+
+            // Update existing items (expense-only)
+            foreach ($allocs as $a) {
+                if (isset($a['_delete']))
+                    continue;
+                if (!empty($a['id'])) {
+                    BudgetItem::query()
+                        ->where('budget_id', $budget->id)
+                        ->where('id', $a['id'])
+                        ->update([
+                            'type' => 'expense',
+                            'category_id' => $a['category_id'] ?? null,
+                            'amount' => (float) ($a['amount'] ?? 0),
+                        ]);
+                }
+            }
+
+            // Insert new allocations tied to existing categories
+            foreach ($allocsNew as $a) {
+                if (empty($a['category_id']))
+                    continue;
+                BudgetItem::create([
+                    'budget_id' => $budget->id,
+                    'type' => 'expense',
+                    'category_id' => $a['category_id'],
+                    'amount' => (float) ($a['amount'] ?? 0),
+                ]);
+            }
+
+            // Insert brand-new categories (expense-only) + allocation
+            foreach ($newCategories as $c) {
+                if (empty($c['name']))
+                    continue;
+
+                $cat = Category::firstOrCreate(
+                    ['user_id' => $request->user()->id, 'name' => $c['name'], 'type' => 'expense'],
+                    ['icon' => null, 'monthly_limit' => 0]
+                );
+
+                BudgetItem::create([
+                    'budget_id' => $budget->id,
+                    'type' => 'expense',
+                    'category_id' => $cat->id,
+                    'amount' => (float) ($c['amount'] ?? 0),
+                ]);
+            }
+        });
+
+        $budget->touch(); // ensure updated_at reflects item changes
+        return redirect()->route('budgets.show', ['budget' => $budget->id, '_' => now()->timestamp]);
     }
 
-    /** Optional: destroy a budget */
+    /** Optional: delete budget */
     public function destroy(Request $request, Budget $budget)
     {
-        abort_unless($budget->user_id === $request->user()->id, 403);
+        abort_if($budget->user_id !== $request->user()->id, 403);
         $budget->delete();
 
         return redirect()->route('budgets.index')->with('status', 'Budget deleted.');

@@ -34,6 +34,7 @@ class Budget extends Model
     {
         return $this->hasMany(BudgetItem::class);
     }
+
     public function incomes()
     {
         return $this->items()->where('type', 'income');
@@ -48,22 +49,24 @@ class Budget extends Model
     }
 
     /**
-     * Dynamic view of activity: a budget is active when "now" is inside its current period window.
-     * - monthly: current calendar month
-     * - weekly: current calendar week
-     * - custom : between start_date and end_date (inclusive)
+     * Computed view-only flag for UI: true when "now" falls inside the budget's current window.
+     * NOTE: this is intentionally NOT overriding the persisted is_active column.
      */
-    public function getIsActiveAttribute($value): bool
+    public function getCurrentlyActiveAttribute(): bool
     {
         [$start, $end] = $this->currentWindow();
         if (!$start || !$end)
             return false;
+
         $now = Carbon::now();
         return $now->between($start, $end);
     }
 
     /**
      * Returns [startCarbon, endCarbon] for the present cycle of this budget.
+     * - monthly: current calendar month (local)
+     * - weekly : Monday..Sunday (explicit)
+     * - custom : bounded by start_date..end_date
      */
     public function currentWindow(): array
     {
@@ -71,7 +74,7 @@ class Budget extends Model
             return [now()->copy()->startOfMonth(), now()->copy()->endOfMonth()];
         }
         if ($this->period === 'weekly') {
-            return [now()->copy()->startOfWeek(), now()->copy()->endOfWeek()];
+            return [now()->copy()->startOfWeek(Carbon::MONDAY), now()->copy()->endOfWeek(Carbon::SUNDAY)];
         }
         $s = $this->start_date ? Carbon::parse($this->start_date)->startOfDay() : null;
         $e = $this->end_date ? Carbon::parse($this->end_date)->endOfDay() : null;

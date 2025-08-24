@@ -17,9 +17,9 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
         @foreach($budgets as $b)
             @php
-                $allocated = $b->items->whereIn('type',['expense','saving'])->sum('amount');
+                $allocated   = $b->items->whereIn('type', ['expense','saving'])->sum('amount');
                 $unallocated = max(0, (float)$b->total_amount - (float)$allocated);
-                $pct = (float)$b->total_amount > 0 ? min(100, round(($allocated / $b->total_amount) * 100)) : 0;
+                $pct         = (float)$b->total_amount > 0 ? min(100, round(($allocated / $b->total_amount) * 100)) : 0;
             @endphp
 
             <div class="relative group rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/60 p-5 shadow-sm hover:shadow-md transition">
@@ -57,8 +57,8 @@
 
                 <div class="mt-5 flex items-center justify-between">
                     <span class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs
-                        {{ $b->is_active ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300' }}">
-                        {{ $b->is_active ? 'Active' : 'Inactive' }}
+                        {{ $b->currently_active ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300' }}">
+                        {{ $b->currently_active ? 'Active' : 'Inactive' }}
                     </span>
 
                     <div class="relative z-10 flex items-center gap-2">
@@ -68,8 +68,7 @@
                         </a>
                         <form method="POST" action="{{ route('budgets.destroy', $b) }}" onsubmit="return confirm('Delete this budget?')">
                             @csrf @method('DELETE')
-                            <button
-                                class="px-3 py-1.5 rounded-md bg-red-600 text-white text-sm hover:bg-red-700">
+                            <button class="px-3 py-1.5 rounded-md bg-red-600 text-white text-sm hover:bg-red-700">
                                 Delete
                             </button>
                         </form>
